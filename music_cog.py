@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import FFmpegPCMAudio
 
 from youtube_dl import YoutubeDL
 
@@ -41,7 +42,11 @@ class music_cog(commands.Cog):
 
             #remove the first element as you are currently playing it
             self.music_queue.pop(0)
-            self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+            try:
+              await self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+
+            except Exception as e:
+              print(e)
         else:
             self.is_playing = False
 
@@ -63,7 +68,13 @@ class music_cog(commands.Cog):
             #remove the first element as you are currently playing it
             self.music_queue.pop(0)
           
-            self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+            print("Starting to play audio")
+            try:
+              await self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+
+            except Exception as e:
+              print(e)
+            print("Finished playing audio")
         else:
             self.is_playing = False
 
@@ -83,8 +94,6 @@ class music_cog(commands.Cog):
             else:
                 await ctx.send("Song added to the queue")
                 self.music_queue.append([song, voice_channel])
-                print(self.music_queue[0][0])
-                
                 if self.is_playing == False:
                     await self.play_music()
 
@@ -95,7 +104,6 @@ class music_cog(commands.Cog):
         for i in range(0, len(self.music_queue)):
             retval += self.music_queue[i][0]['title'] + "\n"
 
-        print(retval)
         if retval != "":
             await ctx.send(retval)
         else:
