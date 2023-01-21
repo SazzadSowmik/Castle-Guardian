@@ -94,5 +94,9 @@ async def type(ctx, arg):
 bot.add_cog(taskFormat_cog(bot))
 bot.add_cog(open_ai_cog(bot))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70fa670f800e306636e2f58f94147d8848994653
 keep_alive()
 bot.run(os.environ['TOKEN'])
