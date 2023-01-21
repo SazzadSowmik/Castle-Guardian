@@ -89,9 +89,10 @@ async def type(ctx, arg):
     await ctx.send(arg)
 
 
-bot.add_cog(music_cog(bot))
+#bot.add_cog(music_cog(bot))
 bot.add_cog(taskFormat_cog(bot))
 
 
-# keep_alive()
+
+keep_alive()
 bot.run(os.environ['TOKEN'])
