@@ -7,6 +7,7 @@ import youtube_dl
 from music_bot import YTDLSource
 from music_cog import music_cog
 from taskFormat_cog import taskFormat_cog
+from open_ai_cog import open_ai_cog
 
 #intents = discord.Intents().all()
 # client = discord.Client()
@@ -91,8 +92,7 @@ async def type(ctx, arg):
 
 #bot.add_cog(music_cog(bot))
 bot.add_cog(taskFormat_cog(bot))
-
-
+bot.add_cog(open_ai_cog(bot))
 
 keep_alive()
 bot.run(os.environ['TOKEN'])

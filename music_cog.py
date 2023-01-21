@@ -10,7 +10,6 @@ class music_cog(commands.Cog):
 
     self.is_playing = False
 
-
     self.music_queue = []
     self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
     self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 - reconnect_delay_max 5', 'options': '-vn' }
@@ -94,6 +93,10 @@ class music_cog(commands.Cog):
             else:
                 await ctx.send("Song added to the queue")
                 self.music_queue.append([song, voice_channel])
+
+                print(self.music_queue[0][0])
+                
+
                 if self.is_playing == False:
                     await self.play_music()
 
