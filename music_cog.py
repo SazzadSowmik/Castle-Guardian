@@ -83,12 +83,10 @@ class music_cog(commands.Cog):
             else:
                 await ctx.send("Song added to the queue")
                 self.music_queue.append([song, voice_channel])
-                m_url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
                 print(self.music_queue[0][0])
                 
                 if self.is_playing == False:
-                    await self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
-                    #await self.play_music()
+                    await self.play_music()
 
 
   @commands.command(name="queue", help="Displays the current songs in queue")
